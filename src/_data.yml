@@ -1,0 +1,12 @@
+lang: ja
+
+menu_links: []
+extra_head: []
+
+# Metas plugin https://lume.land/plugins/metas/#description
+metas:
+  site: blank71
+  description: https://github.com/blank71/blog
+  twitter: "@8blank71"
+  lang: ja
+  generator: ""
