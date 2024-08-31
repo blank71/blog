@@ -7,6 +7,7 @@ import footnotes from "https://deno.land/x/lume_markdown_plugins@v0.7.0/footnote
 import katex from "lume/plugins/katex.ts";
 import { merge } from "lume/core/utils/object.ts";
 import metas from "lume/plugins/metas.ts";
+import ogImages from "lume/plugins/og_images.ts";
 import pagefind, { Options as PagefindOptions } from "lume/plugins/pagefind.ts";
 import postcss from "lume/plugins/postcss.ts";
 import prism, { Options as PrismOptions } from "lume/plugins/prism.ts";
@@ -87,6 +88,7 @@ export default function (userOptions?: Options) {
       // .use(image())
       .use(katex())
       .use(metas())
+      .use(ogImages())
       .use(pagefind(options.pagefind))
       .use(postcss())
       .use(prism(options.prism))

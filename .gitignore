@@ -1,3 +1,5 @@
+.secret
 _site
 _cache
 output
+**/node_modules/**
