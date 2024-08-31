@@ -14,12 +14,30 @@ import prism, { Options as PrismOptions } from "lume/plugins/prism.ts";
 // import resolveUrls from "lume/plugins/resolve_urls.ts";
 import satori, { SatoriOptions } from "lume/deps/satori.ts";
 // import sitemap from "lume/plugins/sitemap.ts";
-import terser from "lume/plugins/terser.ts";
+// import terser from "lume/plugins/terser.ts";
 import toc from "https://deno.land/x/lume_markdown_plugins@v0.7.0/toc.ts";
 
+import { read } from "lume/core/utils/read.ts";
 import { ja } from "https://esm.sh/date-fns@3.6.0/locale/ja";
 
 import "lume/types.ts";
+
+// import { download } from "https://deno.land/x/download@v2.0.2/mod.ts";
+// import { decompress } from "https://deno.land/x/zip@v1.2.5/mod.ts";
+// import { readAll } from "io/read_all.ts";
+
+// await download(
+//   "https://github.com/googlefonts/morisawa-biz-ud-gothic/releasesdownload/v1.051/BIZUDGothic.zip",
+//   {
+//     dir: ".",
+//     file: "download.zip",
+//   },
+// );
+// const destination = await decompress("./download.zip", ".");
+
+// const fontFile = await Deno.open(destination);
+// const fontBuf = await readAll(fontFile);
+// fontFile.close();
 
 export interface Options {
   date?: Partial<DateOptions>;
@@ -29,6 +47,7 @@ export interface Options {
   og?: Partial<ogOptions>;
   pagefind?: Partial<PagefindOptions>;
   prism?: Partial<PrismOptions>;
+  satoriOp?: SatoriOptions;
 }
 
 export const defaults: Options = {
@@ -74,13 +93,42 @@ export const defaults: Options = {
       title: "=title",
     },
   },
-  og: {
-    extensions: [".html"],
-    satori: {
-      width: 1200,
-      height: 600,
-      fonts: [],
-    },
+  satoriOp: {
+    width: 1200,
+    height: 600,
+    fonts: [{
+      name: "Noto Sans JP",
+      weight: 400,
+      style: "normal",
+      data: await read(
+        "https://cdn.jsdelivr.net/npm/@openfonts/noto-sans-jp_japanese@1.44.5/files/noto-sans-jp-japanese-400.woff",
+        true,
+      ),
+    }, {
+      name: "Noto Sans JP",
+      weight: 600,
+      style: "normal",
+      data: await read(
+        "https://cdn.jsdelivr.net/npm/@openfonts/noto-sans-jp_japanese@1.44.5/files/noto-sans-jp-japanese-700.woff",
+        true,
+      ),
+    }, {
+      name: "inter",
+      weight: 400,
+      style: "normal",
+      data: await read(
+        "https://cdn.jsdelivr.net/npm/@xz/fonts@1/serve/src/inter/Inter-Regular.woff",
+        true,
+      ),
+    }, {
+      name: "inter",
+      weight: 700,
+      style: "normal",
+      data: await read(
+        "https://cdn.jsdelivr.net/npm/@xz/fonts@1/serve/src/inter/Inter-SemiBold.woff",
+        true,
+      ),
+    }],
   },
 };
 
@@ -97,8 +145,12 @@ export default function (userOptions?: Options) {
       .use(footnotes())
       // .use(image())
       .use(katex())
+      .use(ogImages({
+        extensions: [".html"],
+        cache: true,
+        satori: options.satoriOp,
+      })) // needs before metas
       .use(metas())
-      .use(ogImages())
       .use(pagefind(options.pagefind))
       .use(postcss())
       .use(prism(options.prism))

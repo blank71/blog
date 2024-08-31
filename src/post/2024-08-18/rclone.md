@@ -1,9 +1,9 @@
 ---
 layout: layouts/post.vto
+openGraphLayout: /layouts/og_images.jsx
 type: blog
 
 title: "Windows で rclone を使う"
-description: "Windows で rclone を使う"
 
 date: '2024-08-18'
 

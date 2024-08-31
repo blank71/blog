@@ -1,5 +1,6 @@
 ---
 layout: layouts/post.vto
+openGraphLayout: /layouts/og_images.jsx
 type: diary
 
 title: "日記"

@@ -1,6 +1,6 @@
 /** @jsxImportSource npm:react@18.2.0 */
 
-export default function ({ title, description }) {
+export default function ({ title, description, metas }) {
   return (
     <div
       style={{
@@ -15,16 +15,25 @@ export default function ({ title, description }) {
         fontWeight: 600,
       }}
     >
-      <svg
-        width="75"
-        viewBox="0 0 75 65"
-        fill="#000"
-        style={{ margin: "0 75px" }}
+      <p
+        style={{
+          maxWidth: "900px",
+          fontSize: "3.75rem",
+        }}
       >
-        {/* <path d="M37.59.25l36.95 64H.64l36.95-64z"></path> */}
-      </svg>
-      <div style={{ marginTop: 40 }}>{title}</div>
-      <div>{description}</div>
+        {title}
+      </p>
+      <p
+        style={{
+          position: "absolute",
+          bottom: "1rem",
+          right: "3rem",
+          fontSize: "1.5rem",
+        }}
+      >
+        {metas.site}
+      </p>
+      <div style={{ marginTop: 0 }}>{description}</div>
     </div>
   );
 }
