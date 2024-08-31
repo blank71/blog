@@ -147,7 +147,7 @@ export default function (userOptions?: Options) {
       .use(katex())
       .use(ogImages({
         extensions: [".html"],
-        cache: true,
+        cache: false,
         satori: options.satoriOp,
       })) // needs before metas
       .use(metas())

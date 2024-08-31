@@ -10,7 +10,7 @@ export default function ({ title, description, metas }) {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "#fff",
+        backgroundColor: "#e0ffff",
         fontSize: 32,
         fontWeight: 600,
       }}
@@ -18,7 +18,7 @@ export default function ({ title, description, metas }) {
       <p
         style={{
           maxWidth: "900px",
-          fontSize: "3.75rem",
+          fontSize: "4rem",
         }}
       >
         {title}
@@ -28,7 +28,7 @@ export default function ({ title, description, metas }) {
           position: "absolute",
           bottom: "1rem",
           right: "3rem",
-          fontSize: "1.5rem",
+          fontSize: "3rem",
         }}
       >
         {metas.site}
