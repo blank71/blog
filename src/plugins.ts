@@ -7,11 +7,12 @@ import footnotes from "https://deno.land/x/lume_markdown_plugins@v0.7.0/footnote
 import katex from "lume/plugins/katex.ts";
 import { merge } from "lume/core/utils/object.ts";
 import metas from "lume/plugins/metas.ts";
-import ogImages from "lume/plugins/og_images.ts";
+import ogImages, { Options as ogOptions } from "lume/plugins/og_images.ts";
 import pagefind, { Options as PagefindOptions } from "lume/plugins/pagefind.ts";
 import postcss from "lume/plugins/postcss.ts";
 import prism, { Options as PrismOptions } from "lume/plugins/prism.ts";
 // import resolveUrls from "lume/plugins/resolve_urls.ts";
+import satori, { SatoriOptions } from "lume/deps/satori.ts";
 // import sitemap from "lume/plugins/sitemap.ts";
 import terser from "lume/plugins/terser.ts";
 import toc from "https://deno.land/x/lume_markdown_plugins@v0.7.0/toc.ts";
@@ -25,6 +26,7 @@ export interface Options {
   feed?: Partial<FeedOptions>;
   feedblog?: Partial<FeedOptions>;
   feeddiary?: Partial<FeedOptions>;
+  og?: Partial<ogOptions>;
   pagefind?: Partial<PagefindOptions>;
   prism?: Partial<PrismOptions>;
 }
@@ -70,6 +72,14 @@ export const defaults: Options = {
     },
     items: {
       title: "=title",
+    },
+  },
+  og: {
+    extensions: [".html"],
+    satori: {
+      width: 1200,
+      height: 600,
+      fonts: [],
     },
   },
 };
