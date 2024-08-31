@@ -112,22 +112,6 @@ export const defaults: Options = {
         "https://cdn.jsdelivr.net/npm/@openfonts/noto-sans-jp_japanese@1.44.5/files/noto-sans-jp-japanese-700.woff",
         true,
       ),
-    }, {
-      name: "inter",
-      weight: 400,
-      style: "normal",
-      data: await read(
-        "https://cdn.jsdelivr.net/npm/@xz/fonts@1/serve/src/inter/Inter-Regular.woff",
-        true,
-      ),
-    }, {
-      name: "inter",
-      weight: 700,
-      style: "normal",
-      data: await read(
-        "https://cdn.jsdelivr.net/npm/@xz/fonts@1/serve/src/inter/Inter-SemiBold.woff",
-        true,
-      ),
     }],
   },
 };
