@@ -35,5 +35,5 @@
 
 .page-pagination {
   border-top: solid 1px var(--color-line);
-  margin-top: var(--row-gap-medium);
+  margin-top: var(--row-gap-xsmall);
 }

@@ -58,13 +58,23 @@ bodyClass: body-post
     <mastodon-comments src="{{ it.comments.src }}" cache="{{ it.comments.cache ?? 60 }}" class="comments">
       {{ i18n.comments.empty }}
     </mastodon-comments>
-  {{ /if }}
   </aside>
+  {{ /if }}
+
+  {{ if changelog }}
+  <hr style="margin: var(--row-gap-xsmall) 0">
+  <div class="post-changelog">
+    <h2 class="header-anchor">変更履歴</h2>
+    {{ for c of changelog }}
+    <div>{{ c.date |> date('DATE') }}: {{ c.summary }}</div>
+    {{ /for }}
+  </div>
+  {{ /if }}
 </article>
 
 <nav class="page-pagination pagination">
   <ul>
-    {{- set previousPost = search.previousPage(url, "type=post") }}
+    {{- set previousPost = search.previousPage(url, "type*=blog|diary") }}
     {{- if previousPost }}
     <li class="pagination-prev">
       <a href="{{ previousPost.url }}" rel="prev">
@@ -74,7 +84,7 @@ bodyClass: body-post
     </li>
     {{ /if }}
 
-    {{- set nextPost = search.nextPage(url, "type=post") }}
+    {{- set nextPost = search.nextPage(url, "type*=blog|diary") }}
     {{- if nextPost }}
     <li class="pagination-next">
       <a href="{{ nextPost.url }}" rel="next">

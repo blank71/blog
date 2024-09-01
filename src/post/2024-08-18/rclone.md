@@ -6,6 +6,9 @@ type: blog
 title: "Windows で rclone を使う"
 
 date: '2024-08-18'
+changelog:
+  - summary: 初稿
+    date: "2024-08-18"
 
 draft: false
 tags:

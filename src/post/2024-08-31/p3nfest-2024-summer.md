@@ -5,7 +5,12 @@ type: blog
 
 title: "P3NFEST 2024 Summer"
 
-date: '2024-08-31'
+date: '2024-09-01'
+changelog:
+  - summary: 初稿
+    date: "2024-08-31"
+  - summary: 微修正
+    date: "2024-09-01"
 
 draft: false
 tags:
@@ -156,8 +161,8 @@ IssueHunt 主催の
 ### 懇親会
 
 VulnUni のハンズオンを一緒に受けた方と一緒に、色々な方とお話した。
-- https://x.com/Nissy_itsec
-- https://x.com/chizu_potato
+- [https://x.com/Nissy_itsec](https://x.com/Nissy_itsec)
+- [https://x.com/chizu_potato](https://x.com/chizu_potato)
 
 LayerX の星さん、日本総研の中川さん、高村さんと深く話すことができた。
 
