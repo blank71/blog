@@ -11,6 +11,8 @@ changelog:
     date: "2024-08-31"
   - summary: 微修正
     date: "2024-09-01"
+  - summary: 「ブログやレポートなど」を追加
+    date: "2024-09-03"
 
 draft: false
 tags:
@@ -178,3 +180,8 @@ LayerX の星さん、日本総研の中川さん、高村さんと深く話す�
 Just Do It
 
 <iframe style="aspect-ratio: 16 / 9; width: 100%; height: 100%;" src="https://www.youtube.com/embed/ZXsQAXx_ao0?si=apXNodPMupDVni09" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+## ブログやレポートなど
+
+- [P3NFEST 2024 Summer のハンズオン講座に関する開催記（実践的なバグバウンティ入門） - blog of morioka12](https://scgajge12.hatenablog.com/entry/p3nfest_2024_summer_bugbounty)
+- [学生のためのサイバーセキュリティカンファレンス「P3NFST 2024 Summer」開催レポート](https://issuehunt.jp/events/2024/summer/news/thanks)
