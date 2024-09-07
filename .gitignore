@@ -3,3 +3,4 @@ _site
 _cache
 output
 **/node_modules/**
+src/post/draft
