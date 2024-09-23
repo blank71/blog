@@ -5,7 +5,7 @@ type: blog
 
 title: "P3NFEST 2024 Summer"
 
-date: '2024-09-01'
+date: '2024-08-31'
 changelog:
   - summary: 初稿
     date: "2024-08-31"
