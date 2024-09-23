@@ -1,5 +1,5 @@
 .page-header {
-  margin-bottom: var(--row-gap-medium);
+  margin-bottom: var(--row-gap-small);
 
   &>p:first-child {
     margin-top: 0;
@@ -15,7 +15,7 @@
 }
 
 .page-navigation {
-  margin-bottom: var(--row-gap-medium);
+  margin-bottom: var(--row-gap-small);
 
   & ul {
     list-style: none;

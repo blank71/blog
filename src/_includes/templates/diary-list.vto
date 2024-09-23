@@ -1,17 +1,16 @@
 <ul class="postList">
   {{ for post of postslist }}
   <li class="post">
+    {{ include "templates/post-details.vto" {
+      date: post.date,
+      tags: post.tags,
+      author: post.author,
+    } }}
     <h2 class="post-title">
       <a href="{{ post.url }}" {{ if post.url == url }} aria-current="page"{{ /if }}>
         {{ post.title || post.url }}
       </a>
     </h2>
-
-    {{ include "templates/diary-details.vto" {
-      date: post.date,
-      tags: post.tags,
-      author: post.author,
-    } }}
   </li>
   {{ /for }}
 </ul>
