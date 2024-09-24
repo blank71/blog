@@ -6,10 +6,10 @@ type: blog
 title: "既存 Ansible Playbook 改善"
 description: "Rye による Python パッケージ管理と ansible-lint による静的解析"
 
-date: '2024-09-21'
+date: '2024-09-24'
 changelog:
   - summary: 初稿
-    date: "2024-09-21"
+    date: "2024-09-24"
 
 draft: false
 tags:
