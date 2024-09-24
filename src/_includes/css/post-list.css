@@ -7,7 +7,7 @@
   }
 
   & li.post+li.post {
-    margin-top: var(--row-gap-small);
+    margin-top: var(--row-gap-xsmall);
   }
 
   & .post-header {

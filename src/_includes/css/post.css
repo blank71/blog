@@ -10,6 +10,13 @@
   color: var(--color-base);
 }
 
+.post-description {
+  letter-spacing: var(--font-display-spacing);
+  margin: 0 0 0.2em;
+  text-wrap: balance;
+  color: var(--color-base);
+}
+
 .post-details {
   display: flex;
   flex-flow: row wrap;

@@ -11,6 +11,11 @@
         {{ post.title || post.url }}
       </a>
     </h2>
+    {{ if post.description }}
+    <h3 class="post-description">
+      {{ post.description }}
+    </h3>
+    {{ /if }}
   </li>
   {{ /for }}
 </ul>
