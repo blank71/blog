@@ -812,7 +812,7 @@ Passed: 0 failure(s), 0 warning(s) on 38 files. Last profile that met the valida
 ```
 
 ansible-lint で解析するファイルを指定することができる。
-`ansible-lint` だけの場合は複数回参照されてしまい `107 files` のように実体のファイル数より多く表示されてしまう。
+`ansible-lint` だけの場合は複数回参照されてしまい `107 files` のように実態のファイル数より多く表示されてしまう。
 トップレベルの playbook を指定すると参照先まで自動的に解析してくれる。
 新しい実装では既存実装と比較してファイルを削減して、かつ簡潔にすることができたと思う。
 新しい実装では playbooks ディレクトリにまとめたので下記でいい感じに解析してくれる。
