@@ -14,6 +14,9 @@ changelog:
 draft: false
 tags:
   - Kubernetes
+  - Ryzen
+  - 自作 PC
+  - DeskMeet
 metas:
   title: "=title"
 ---
