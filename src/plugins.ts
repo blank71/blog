@@ -52,7 +52,7 @@ export interface Options {
 
 export const defaults: Options = {
   feed: {
-    output: ["/feed.rss"],
+    output: ["/feed.xml"],
     query: "type*=blog|diary",
     sort: "date=desc",
     info: {
@@ -66,7 +66,7 @@ export const defaults: Options = {
     },
   },
   feedblog: {
-    output: ["/blog.rss"],
+    output: ["/blog.xml"],
     query: "type=blog",
     sort: "date=desc",
     info: {
@@ -80,7 +80,7 @@ export const defaults: Options = {
     },
   },
   feeddiary: {
-    output: ["/diary.rss"],
+    output: ["/diary.xml"],
     query: "type=diary",
     sort: "date=desc",
     info: {
@@ -141,7 +141,8 @@ export default function (userOptions?: Options) {
       // .use(resolveUrls())
       // .use(sitemap())
       // .use(terser())
-      .use(toc());
+      .use(toc())
+      .copy([".png"]);
 
     // Alert plugin
     site.hooks.addMarkdownItPlugin(alert);
