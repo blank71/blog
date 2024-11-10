@@ -8,5 +8,6 @@ metas:
   site: blank71
   description: https://github.com/blank71/blog
   twitter: "@8blank71"
+  fediverse:creator: "@blank71@fedibird.com"
   lang: ja
   generator: ""
