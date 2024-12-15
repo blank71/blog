@@ -34,7 +34,7 @@ rclone を利用する。
 
 winget を用いてインストールする。
 
-```
+```powershell
 winget Rclone.Rclone
 ```
 
@@ -45,7 +45,7 @@ rclone を使用するためには config を設定する必要があるとの�
 を指定し、ssh
 に必要な鍵を指定する等を行う。対話形式で設定した結果、設定ファイルは下記のようになった。
 
-```
+```ini
 [some-source]
 type = sftp
 host = some-host
@@ -57,7 +57,7 @@ pubkey_file = ~/.ssh/some-host.pub
 
 ソースからファイルをコピーする場合は下記のようにする。
 
-```
+```powershell
 rclone copy --verbose some-source:/some/dir .
 ```
 

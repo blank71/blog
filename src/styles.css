@@ -6,6 +6,7 @@
 @import "css/page.css";
 @import "css/post-list.css";
 @import "css/post.css";
+@import "css/code_theme.css";
 
 /* Make the links black */
 :root {
@@ -27,4 +28,8 @@ main {
 /* Search tweak */
 .search {
   margin-top: var(--row-gap-xsmall);
+}
+
+code[class*="language-"] {
+  color: aliceblue;
 }

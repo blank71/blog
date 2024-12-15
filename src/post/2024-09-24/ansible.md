@@ -53,7 +53,7 @@ GitHub Actions を用いて自動的に Terraform が実行されるようにす
 
 全て AlmaLinux 9。
 
-```
+```bash
 $ cat /etc/os-release | grep PRETTY_NAME
 PRETTY_NAME="AlmaLinux 9.4 (Seafoam Ocelot)"
 ```
@@ -62,7 +62,7 @@ PRETTY_NAME="AlmaLinux 9.4 (Seafoam Ocelot)"
 
 ansible の実行ユーザーとして各サーバーで deploy ユーザーを作成する。
 
-```
+```bash
 mkdir -p /home/users
 groupadd -g 1200 deploy
 useradd -g deploy -u 1200 -c "ansible deploy" -d /home/users/deploy deploy
@@ -87,26 +87,26 @@ Python と Python パッケージを管理するために Rye を使用する。
 `RYE_INSTALL_OPTION="--yes"` で自動的にインストールが完了する。
 インストール時に設定を行いたい場合はオプションの部分を除外する。
 
-```
+```bash
 curl -sSf https://rye.astral.sh/get | RYE_INSTALL_OPTION="--yes" bash
 ```
 
 パスを通す。
 
-```
+```bash
 echo 'source "$HOME/.rye/env"' >> ~/.bashrc
 ```
 
 Bash の補完を行う設定をする。
 
-```
+```bash
 mkdir -p ~/.local/share/bash-completion/completions
 rye self completion > ~/.local/share/bash-completion/completions/rye.bash
 ```
 
 ドキュメント執筆時のバージョン情報。
 
-```
+```bash
 $ rye --version
 rye 0.39.0
 commit: 0.39.0 (bf3ccf818 2024-08-21)
@@ -120,13 +120,13 @@ uv enabled: true
 
 このプロジェクトは Python プロジェクトではなく、ansible-playbook が動作すれば良いため `--virtual` オプションを指定する。
 
-```
+```bash
 rye init . --virtual
 ```
 
 直後のファイル構成は下記である。
 
-```
+```bash
 $ tree -a -L 1
 .
 ├── .git
@@ -140,7 +140,7 @@ $ tree -a -L 1
 
 `pyproject.toml` は最低限の設定で良く、project name や project version 等は必要ないため下記で良い。
 
-```
+```bash
 cat << '_EOF_' > ./pyproject.toml
 [project]
 dependencies = []
@@ -159,13 +159,13 @@ _EOF_
 そこでは Python 3.6 を利用している。
 ansible-core のバージョン 2.17 以降は [Python 3.6 がサポートされていない](https://docs.ansible.com/ansible/latest/reference_appendices/release_and_maintenance.html)ため 2.17 未満を使用する。
 
-```
+```bash
 rye add "ansible-core<2.17" "ansible-lint"
 ```
 
 依存関係は下記のように記述される。
 
-```
+```bash
 cat << '_EOF_' > ./pyproject.toml
 [project]
 dependencies = [
@@ -185,13 +185,13 @@ _EOF_
 `--no-lock` オプションを指定して lock ファイルを更新しないようすることができる。
 パッケージ群を更新する際はオプションを指定せずに実行する。
 
-```
+```bash
 rye sync --no-lock
 ```
 
 バージョン情報は下記になった。
 
-```
+```bash
 $ rye run ansible-lint --version
 ansible-lint 24.9.2 using ansible-core:2.16.11 ansible-compat:24.9.1 ruamel-yaml:0.18.6 ruamel-yaml-clib:0.2.8
 ```
@@ -207,7 +207,7 @@ INI 形式で記述する場合は下記のようになる。
 YAML 形式で記述することも可能。
 すべてのマネージドノードは暗黙的に all グループに所属している。
 
-```
+```bash
 cat << '_EOF_' > ./inventory
 [controle]
 cont ansible_host=192.168.122.123
@@ -220,7 +220,7 @@ _EOF_
 下記のようにグループに親子関係を作ることができる。
 複数のマネージドノードを作成するのが面倒だったため、横着して指定している。
 
-```
+```bash
 cat << '_EOF_' > ./inventory
 [all:children]
 controle
@@ -237,7 +237,7 @@ _EOF_
 
 YAML 形式では下記のように記述できる。
 
-```
+```bash
 all:
   children:
     controle:
@@ -261,7 +261,7 @@ manage:
 
 下記のコマンドで inventory がどのように読み込まれているのか確認することができる。
 
-```
+```bash
 $ ansible-inventory --list
 {
     "_meta": {
@@ -309,7 +309,7 @@ ansible 実行時にコマンドライン引数として指定しなくともコ
 デフォルトの設定ではログファイルが作成されないため設定しておくべきだろう。
 `host_key_checking` はデフォルトで `true` ではある。
 
-```
+```bash
 cat << '_EOF_' > ./ansible.cfg
 [defaults]
 inventory=./inventory
@@ -325,7 +325,7 @@ _EOF_
 ping を行う playbook を作成する。
 all グループに対して実行する。
 
-```
+```bash
 mkdir -p 01-ping
 cat << '_EOF_' > 01-ping/ping.yaml
 ---
@@ -343,7 +343,7 @@ _EOF_
 
 実行する。
 
-```
+```bash
 $ ansible-playbook 01-ping/ping.yaml
 
 PLAY [Exec ping] **********************************************************
@@ -378,7 +378,7 @@ manage02                   : ok=3    changed=0    unreachable=0    failed=0    s
 対象グループを変更してみる。
 manage のみを対象にする。
 
-```
+```bash
 cat << '_EOF_' > 01-ping/ping.yaml
 ---
 - name: My first play
@@ -395,7 +395,7 @@ _EOF_
 
 実行する。
 
-```
+```bash
 $ ansible-playbook 01-ping/ping.yaml
 
 PLAY [My first play] **********************************************************
@@ -424,7 +424,7 @@ manage02                   : ok=3    changed=0    unreachable=0    failed=0    s
 -l オプションで実行先のノードまたはグループを指定することができるが、hosts で指定されたノードまたはグループからしか指定することができない。
 例えば、cont は manage グループに属していないため指定することができない。
 
-```
+```bash
 $ ansible-playbook 01-ping/ping.yaml -l cont
 
 PLAY [My first play] **********************************************************
@@ -466,7 +466,7 @@ whoami を実行して ansible の実行環境上で得られた出力を出力�
 設定しないと ansible-lint に怒られる。
 得られた標準出力を ansible の実行環境上で出力する。
 
-```
+```bash
 mkdir -p 02-get-status
 cat << '_EOF_' > 02-get-status/whoami.yaml
 ---
@@ -486,7 +486,7 @@ _EOF_
 
 実行する。
 
-```
+```bash
 $ ansible-playbook 02-get-status/whoami.yaml
 
 PLAY [Whoami] ******************************************************************
@@ -525,7 +525,7 @@ manage02                   : ok=3    changed=0    unreachable=0    failed=0    s
 Ansible の実行において終了コードを正しく得ることは大事である。
 設定しないと ansible-lint に怒られる。
 
-```
+```bash
 mkdir -p 02-get-status
 cat << '_EOF_' > 02-get-status/version_id.yaml
 ---
@@ -545,7 +545,7 @@ _EOF_
 
 実行する。
 
-```
+```bash
 $ ansible-playbook 02-get-status/version_id.yaml
 
 PLAY [Get VERSION_ID] **********************************************************
@@ -583,13 +583,13 @@ ansible 実行時に `Gathering Facts` として対象のマネージドノー�
 デフォルトでは playbook を実行時に初めに収集する。
 下記で具体的な値を確認することができる。
 
-```
+```bash
 ansible all -m ansible.builtin.setup
 ```
 
 playbook の中では下記のようにして参照することができる。
 
-```
+```bash
 mkdir -p 02-get-status
 cat << '_EOF_' > 02-get-status/ansible_facts.yaml
 ---
@@ -608,7 +608,7 @@ _EOF_
 
 実行する。
 
-```
+```bash
 $ ansible-playbook 02-get-status/ansible_facts.yaml
 
 PLAY [Get facts] ***************************************************************
@@ -653,7 +653,7 @@ ansible 全体の設定として実行されないようにする場合は `ansi
 色々な Ansible の運用の記事を読んでみると、ベストプラクティスとして `explict` を指定している例が多い。
 確かに `Gathering Facts` が必要になることはそこまで多くないはずで、このような運用の方が理にかなっていると感じる。
 
-```
+```bash
 mkdir -p 02-get-status
 cat << '_EOF_' > 02-get-status/ansible_facts.yaml
 ---
@@ -685,7 +685,7 @@ _EOF_
 ユーザーの追加は特権が必要になる。
 特権が使用可能なユーザーと特権昇格のためのパスワードの入力が必要になる。
 
-```
+```bash
 mkdir -p 03-user_create
 cat << '_EOF_' > 03-user_create/add_user.yaml
 ---
@@ -705,7 +705,7 @@ _EOF_
 そのため、`ansible.cfg` ファイルで指定しない。
 既に環境への適用が完了しているため `changed` が 0 になっている。
 
-```
+```bash
 $ ansible-playbook 03-user_create/add_user.yaml --ask-become-pass
 BECOME password: ### put passwd here
 
@@ -732,7 +732,7 @@ manage02                   : ok=2    changed=0    unreachable=0    failed=0    s
 ロールを利用することで Playbook の処理にまとまりを作ることができる。
 ロールを作成する。
 
-```
+```bash
 mkdir -p 04-role/roles/user_create/tasks
 cat << '_EOF_' > 04-role/roles/user_create/tasks/main.yml
 ---
@@ -754,7 +754,7 @@ _EOF_
 
 実行は下記のようにする。
 
-```
+```bash
 ansible-playbook 04-role/user_create.yml
 ```
 
@@ -766,7 +766,7 @@ ansible-playbook 04-role/user_create.yml
 
 既存の playbook を ansible-lint で解析してみると、何を直すべきなのか教えてくれる。
 
-```
+```bash
 $ ansible-lint
 ...
 Read documentation for instructions on how to ignore specific rule violations.
@@ -806,7 +806,7 @@ Failed: 1544 failure(s), 0 warning(s) on 107 files. Last profile that met the va
 
 新しい実装では下記のように失敗と警告が 0 になっている。
 
-```
+```bash
 $ ansible-lint
 Passed: 0 failure(s), 0 warning(s) on 38 files. Last profile that met the validation criteria was 'production'.
 ```
@@ -817,7 +817,7 @@ ansible-lint で解析するファイルを指定することができる。
 新しい実装では既存実装と比較してファイルを削減して、かつ簡潔にすることができたと思う。
 新しい実装では playbooks ディレクトリにまとめたので下記でいい感じに解析してくれる。
 
-```
+```bash
 $ ansible-lint playbooks/*
 Passed: 0 failure(s), 0 warning(s) on 17 files. Last profile that met the validation criteria was 'production'.
 
@@ -842,7 +842,7 @@ ansible を実行する前に、どのような変更が適用されるのか確
 
 基本的なユーザー情報は下記のような形で一つのファイルにまとまっている。
 
-```
+```yaml
 - create_user: piyo
   uid: *****
   password: $6$SALT$*****
@@ -855,7 +855,7 @@ ansible を実行する前に、どのような変更が適用されるのか確
 sudo が使えるかどうかの設定は、各マネージドノードごとにファイルが存在していて下記のような形になっている。
 マネージドノードノードが 20 台存在したら、20 個のファイルが存在し、各ファイルに各ユーザーの設定が書かれている。
 
-```
+```yaml
 - user: piyo
   groups:
       - admin
@@ -868,7 +868,7 @@ sudo が使えるかどうかの設定は、各マネージドノードごとに
 `./vars` から参照するようにした。
 下記が具体的なディレクトリ構成である。
 
-```
+```bash
 $ tree . -L 2
 .
 ├── ansible.cfg
@@ -890,7 +890,7 @@ $ tree . -L 2
 
 `playbooks/user_create.yml` では下記のようにして `vars/user.yml` を読み込んでいる。
 
-```
+```yaml
 ---
 - name: "Exec user_create"
   hosts: all
@@ -910,7 +910,7 @@ $ tree . -L 2
 `groups` で `admin` を設定すると全てのマネージドノードで `admin` グループに属するため、`admin_hosts` の設定は特に意味はない。
 `admin_hosts` で指定することによって、組織の新メンバーが特権を行使できるサーバーを制限している。
 
-```
+```yaml
 - create_user: piyo
   state: present
   uid: *****

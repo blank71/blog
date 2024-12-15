@@ -1,5 +1,8 @@
 import { alert } from "npm:@mdit/plugin-alert@0.12.0";
 import basePath from "lume/plugins/base_path.ts";
+import codeHighlight, {
+  Options as CodeHighlightOptions,
+} from "lume/plugins/code_highlight.ts";
 import date, { Options as DateOptions } from "lume/plugins/date.ts";
 import feed, { Options as FeedOptions } from "lume/plugins/feed.ts";
 import footnotes from "https://deno.land/x/lume_markdown_plugins@v0.7.0/footnotes.ts";
@@ -40,6 +43,7 @@ import "lume/types.ts";
 // fontFile.close();
 
 export interface Options {
+  codeHighlight?: Partial<CodeHighlightOptions>;
   date?: Partial<DateOptions>;
   feed?: Partial<FeedOptions>;
   feedblog?: Partial<FeedOptions>;
@@ -51,6 +55,14 @@ export interface Options {
 }
 
 export const defaults: Options = {
+  codeHighlight: {
+    theme: [
+      {
+        name: "sunburst",
+        path: "/_includes/css/code_theme.css",
+      },
+    ],
+  },
   feed: {
     output: ["/feed.xml"],
     query: "type*=blog|diary",
@@ -142,7 +154,8 @@ export default function (userOptions?: Options) {
       // .use(sitemap())
       // .use(terser())
       .use(toc())
-      .copy([".png"]);
+      .copy([".png"])
+      .use(codeHighlight(options.codeHighlight));
 
     // Alert plugin
     site.hooks.addMarkdownItPlugin(alert);
