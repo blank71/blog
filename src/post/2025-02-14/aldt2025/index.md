@@ -66,6 +66,7 @@ RHEL のリリースからおおむね 1 週間以内にリリースをしてい
 - https://wiki.rockylinux.org/rocky/version/
 ![alma9-release](./img/alma9.png)
 ![rocky9-release](./img/rocky9.png)
+
 しかし、発表の中では Rocky Linux と比較した話はなく、AlmaLinux のコミュニティ志向で激しい競い合いを目的としていない色が出ているように感じた。
 
 最後に `No drama, just Linux` ということが説明された。
