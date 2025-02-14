@@ -3,7 +3,7 @@ layout: layouts/post.vto
 openGraphLayout: /layouts/og_images.jsx
 type: blog
 
-title: "AlmaLinux Day Tokyo 2025"
+title: "AlmaLinux Day Tokyo 2024"
 description: ""
 
 date: '2025-02-14'
@@ -19,7 +19,7 @@ metas:
   title: "=title"
 ---
 ## AlmaLinux Day Tokyo
-昨年は法政大学情報科学部の Advent Calendar の記事として [Almalinux Day Tokyo 2024 に参加した記事](https://gist.github.com/blank71/388f5a7cafa00b288e3e4450a97a2539)を書いた。
+昨年は法政大学情報科学部の Advent Calendar の記事として [Almalinux Day Tokyo 2023 に参加した記事](https://gist.github.com/blank71/388f5a7cafa00b288e3e4450a97a2539)を書いた。
 今年は同じ Advent Calendar を作成していなく、何か関連する Advent Calendar はないものか、と探したが私の所属に関連するものはなかった。
 とりあえず同じキャンパスの Advent Calendar でも貼っておく。
 - [K3 Advent Calendar 2024 - Adventar](https://adventar.org/calendars/10132)
@@ -43,7 +43,7 @@ RHEL のダウンストリームとして使用することはできなくなっ
 
 [^RHEL]: [https://ja.wikipedia.org/wiki/Red_Hat_Enterprise_Linux](https://ja.wikipedia.org/wiki/Red_Hat_Enterprise_Linux) 
 
-## AlmaLinux Day Tokyo 2025
+## AlmaLinux Day Tokyo 2024
 今年の会場は SoftBank 本社だった。会場が 30 階で海と富士山が見える良い景色だった。
 
 スケジュールは下記のようになっていた。
