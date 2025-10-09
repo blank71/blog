@@ -1,20 +1,45 @@
-<!doctype html>
+<!DOCTYPE html>
 
 <html lang="{{ it.lang }}">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ it.title || metas.title }}{{ if it.description }} - {{ it.description }}{{ /if }} | {{ metas.site }}</title>
+    <title>
+      {{ it.title || metas.title }}{{ if it.description }}
+        - {{ it.description }}{{ /if }} | {{ metas.site }}
+    </title>
 
     <meta name="supported-color-schemes" content="light dark">
-    <meta name="theme-color" content="hsl(220, 20%, 100%)" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="hsl(220, 20%, 10%)" media="(prefers-color-scheme: dark)">
+    <meta
+      name="theme-color"
+      content="hsl(220, 20%, 100%)"
+      media="(prefers-color-scheme: light)"
+    >
+    <meta
+      name="theme-color"
+      content="hsl(220, 20%, 10%)"
+      media="(prefers-color-scheme: dark)"
+    >
 
-    <link rel="me" href="https://fedibird.com/@blank71">    
+    <link rel="me" href="https://fedibird.com/@blank71">
+    {{# <link rel="stylesheet" href="/style.css"> #}}
     <link rel="stylesheet" href="/styles.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.css">
-    <link rel="alternate" href="/feed.xml" type="application/atom+xml" title="{{ metas.site }}">
-    <link rel="alternate" href="/feed.json" type="application/json" title="{{ metas.site }}">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.css"
+    >
+    <link
+      rel="alternate"
+      href="/feed.xml"
+      type="application/atom+xml"
+      title="{{ metas.site }}"
+    >
+    <link
+      rel="alternate"
+      href="/feed.json"
+      type="application/json"
+      title="{{ metas.site }}"
+    >
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
     <link rel="canonical" href="{{ url |> url(true) }}">
     {{ it.extra_head?.join("\n") }}
@@ -30,36 +55,46 @@
       </a>
 
       <ul class="navbar-links">
-      {{- for entry of search.pages("menu.visible=true", "menu.order") }}
+        {{- for entry of search.pages("menu.visible=true", "menu.order") }}
+          <li>
+            <a
+              href="{{ entry.url }}"
+              {{ if entry.url == url }}
+                aria-current="page"{{ /if }}
+            >
+              {{ entry.menu.title || entry.title }}
+            </a>
+          </li>
+        {{ /for }}
+        {{- for link of it.menu_links }}
+          <li>
+            <a
+              href="{{ link.href }}"
+              {{ if link.target }}
+                target="{{ link.target }}"{{ /if }}
+            >
+              {{ link.text }}
+            </a>
+          </li>
+        {{ /for }}
         <li>
-          <a href="{{ entry.url }}"{{ if entry.url == url }} aria-current="page"{{ /if }}>
-            {{ entry.menu.title || entry.title }}
-          </a>
-        </li>
-      {{ /for }}
-      {{- for link of it.menu_links }}
-        <li>
-          <a href="{{ link.href }}"{{ if link.target }} target="{{link.target}}"{{ /if }}>
-            {{ link.text }}
-          </a>
-        </li>
-      {{ /for }}
-      <li>
-        <script>
-          let theme = localStorage.getItem("theme") || (window.matchMedia("(prefers-color-scheme: dark)").matches
-            ? "dark"
-            : "light");
-          document.documentElement.dataset.theme = theme;
-          function changeTheme() {
-            theme = theme === "dark" ? "light" : "dark";
-            localStorage.setItem("theme", theme);
+          <script>
+            let theme = localStorage.getItem("theme") ||
+              (window.matchMedia("(prefers-color-scheme: dark)")
+                  .matches
+                ? "dark"
+                : "light");
             document.documentElement.dataset.theme = theme;
-          }
-        </script>
-        <button class="button" onclick="changeTheme()">
-          <span class="icon">◐</span>
-        </button>
-      </li>
+            function changeTheme() {
+              theme = theme === "dark" ? "light" : "dark";
+              localStorage.setItem("theme", theme);
+              document.documentElement.dataset.theme = theme;
+            }
+          </script>
+          <button class="button" onclick="changeTheme()">
+            <span class="icon">◐</span>
+          </button>
+        </li>
       </ul>
     </nav>
 

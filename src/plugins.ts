@@ -13,9 +13,8 @@ import metas from "lume/plugins/metas.ts";
 import ogImages, { Options as ogOptions } from "lume/plugins/og_images.ts";
 import pagefind, { Options as PagefindOptions } from "lume/plugins/pagefind.ts";
 import postcss from "lume/plugins/postcss.ts";
-import prism, { Options as PrismOptions } from "lume/plugins/prism.ts";
 // import resolveUrls from "lume/plugins/resolve_urls.ts";
-import satori, { SatoriOptions } from "lume/deps/satori.ts";
+import type { SatoriOptions } from "lume/deps/satori.ts";
 // import sitemap from "lume/plugins/sitemap.ts";
 // import terser from "lume/plugins/terser.ts";
 import toc from "https://deno.land/x/lume_markdown_plugins@v0.7.0/toc.ts";
@@ -43,25 +42,25 @@ import "lume/types.ts";
 // fontFile.close();
 
 export interface Options {
-  codeHighlight?: Partial<CodeHighlightOptions>;
   date?: Partial<DateOptions>;
   feed?: Partial<FeedOptions>;
   feedblog?: Partial<FeedOptions>;
   feeddiary?: Partial<FeedOptions>;
   og?: Partial<ogOptions>;
   pagefind?: Partial<PagefindOptions>;
-  prism?: Partial<PrismOptions>;
   satoriOp?: SatoriOptions;
+  codeHighlightOp?: Partial<CodeHighlightOptions>;
 }
 
 export const defaults: Options = {
-  codeHighlight: {
-    theme: [
-      {
-        name: "sunburst",
-        path: "/_includes/css/code_theme.css",
-      },
-    ],
+  pagefind: {
+    ui: {
+      showImages: false,
+      excerptLength: 0,
+      showEmptyFilters: true,
+      showSubResults: false,
+      resetStyles: true,
+    },
   },
   feed: {
     output: ["/feed.xml"],
@@ -112,19 +111,47 @@ export const defaults: Options = {
       name: "Noto Sans JP",
       weight: 400,
       style: "normal",
-      data: await read(
+      data: (await read(
         "https://cdn.jsdelivr.net/npm/@openfonts/noto-sans-jp_japanese@1.44.5/files/noto-sans-jp-japanese-400.woff",
         true,
-      ),
+      )).buffer,
     }, {
       name: "Noto Sans JP",
       weight: 600,
       style: "normal",
-      data: await read(
+      data: (await read(
         "https://cdn.jsdelivr.net/npm/@openfonts/noto-sans-jp_japanese@1.44.5/files/noto-sans-jp-japanese-700.woff",
         true,
-      ),
+      )).buffer,
     }],
+  },
+  codeHighlightOp: {
+    theme: [
+      // Default light theme
+      {
+        name: "atom-one-light",
+        cssFile: "/styles.css",
+        placeholder: "/* CODE_HIGHLIGHT_LIGHT_THEME */",
+      },
+      // System dark theme
+      {
+        name: "atom-one-dark",
+        cssFile: "/styles.css",
+        placeholder: "/* CODE_HIGHLIGHT_DARK_THEME */",
+      },
+      // Manual dark theme
+      {
+        name: "atom-one-dark",
+        cssFile: "/styles.css",
+        placeholder: "/* MANUAL_DARK_THEME */",
+      },
+      // Manual light theme
+      {
+        name: "atom-one-light",
+        cssFile: "/styles.css",
+        placeholder: "/* MANUAL_LIGHT_THEME */",
+      },
+    ],
   },
 };
 
@@ -133,6 +160,8 @@ export default function (userOptions?: Options) {
 
   return (site: Lume.Site) => {
     site
+      .use(katex())
+      .use(postcss())
       .use(basePath())
       .use(date({ locales: { ja } }))
       .use(feed(options.feed))
@@ -140,22 +169,16 @@ export default function (userOptions?: Options) {
       .use(feed(options.feeddiary))
       .use(footnotes())
       // .use(image())
-      .use(katex())
-      .use(ogImages({
-        extensions: [".html"],
-        cache: false,
-        satori: options.satoriOp,
-      })) // needs before metas
+      .use(ogImages()) // needs before metas
       .use(metas())
       .use(pagefind(options.pagefind))
-      .use(postcss())
-      .use(prism(options.prism))
       // .use(resolveUrls())
       // .use(sitemap())
       // .use(terser())
       .use(toc())
       .copy([".png"])
-      .use(codeHighlight(options.codeHighlight));
+      .add([".css"])
+      .use(codeHighlight(options.codeHighlightOp));
 
     // Alert plugin
     site.hooks.addMarkdownItPlugin(alert);

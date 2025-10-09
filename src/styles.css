@@ -6,12 +6,56 @@
 @import "css/page.css";
 @import "css/post-list.css";
 @import "css/post.css";
-@import "css/code_theme.css";
+/* @import "css/code-highlight.css"; */
 
-/* Make the links black */
+/* Code highlighting themes */
+/* CODE_HIGHLIGHT_LIGHT_THEME */
+
+@media (prefers-color-scheme: dark) {
+  /* CODE_HIGHLIGHT_DARK_THEME */
+}
+
+/* Manual theme override support */
+[data-theme="dark"] {
+  /* MANUAL_DARK_THEME */
+}
+
+[data-theme="light"] {
+  /* MANUAL_LIGHT_THEME */
+}
+
+/* Theme variables: default (light) + prefers-color-scheme and manual override */
 :root {
+  /* Background and borders */
+  --color-bg: #ffffff;
+  --color-line: rgba(0, 0, 0, 0.15);
+
   --color-link: var(--color-base);
   --color-link-hover: var(--color-dim);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #0d1117;
+    --color-line: rgba(255, 255, 255, 0.35);
+  }
+}
+
+[data-theme="dark"] {
+  --color-bg: #0d1117;
+  --color-line: rgba(255, 255, 255, 0.35);
+}
+
+[data-theme="light"] {
+  --color-bg: #ffffff;
+  --color-line: rgba(0, 0, 0, 0.15);
+}
+
+/* Ensure body uses the background color */
+body {
+  background: var(--color-bg);
+  color: var(--color-base);
+  padding-top: 5rem;
 }
 
 /* Page layout */
@@ -28,8 +72,4 @@ main {
 /* Search tweak */
 .search {
   margin-top: var(--row-gap-xsmall);
-}
-
-code[class*="language-"] {
-  color: aliceblue;
 }
