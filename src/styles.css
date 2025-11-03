@@ -51,6 +51,36 @@
   --color-line: rgba(0, 0, 0, 0.15);
 }
 
+/* Code copy button */
+.code-copy-button {
+  position: absolute;
+  top: 0.5em;
+  right: 0.5em;
+  padding: 0.3em 0.8em;
+  font-size: 0.85em;
+  font-family: var(--font-ui);
+  background: var(--color-background, rgba(128, 128, 128, 0.2));
+  color: var(--color-text, var(--color-base));
+  border: 1px solid var(--color-line);
+  border-radius: 0.3em;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s, background 0.2s;
+}
+
+.code-copy-button:hover {
+  opacity: 1;
+  background: var(--color-background, rgba(128, 128, 128, 0.3));
+}
+
+.code-copy-button:active {
+  transform: scale(0.95);
+}
+
+pre:has(> code.hljs) {
+  position: relative;
+}
+
 /* Ensure body uses the background color */
 body {
   background: var(--color-bg);
