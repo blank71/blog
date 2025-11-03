@@ -8,6 +8,7 @@ import feed, { Options as FeedOptions } from "lume/plugins/feed.ts";
 import footnotes from "https://deno.land/x/lume_markdown_plugins@v0.7.0/footnotes.ts";
 // import image from "https://deno.land/x/lume_markdown_plugins@v0.7.0/image.ts";
 import katex from "lume/plugins/katex.ts";
+import mermaid from "https://deno.land/x/lume_mermaid@v0.1.4/mod.ts";
 import { merge } from "lume/core/utils/object.ts";
 import metas from "lume/plugins/metas.ts";
 import ogImages, { Options as ogOptions } from "lume/plugins/og_images.ts";
@@ -161,6 +162,12 @@ export default function (userOptions?: Options) {
   return (site: Lume.Site) => {
     site
       .use(katex())
+      .use(mermaid({
+        theme: "neutral",
+        config: {
+          startOnLoad: true,
+        },
+      }))
       .use(postcss())
       .use(basePath())
       .use(date({ locales: { ja } }))
