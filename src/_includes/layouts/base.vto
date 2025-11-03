@@ -134,22 +134,33 @@
           (pre) => {
             const button = document.createElement("button");
             button.className = "code-copy-button";
-            button.textContent = "Copy";
             button.setAttribute("aria-label", "Copy code to clipboard");
+
+            // Copy icon SVG
+            const copyIcon = `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 4V2C5 1.44772 5.44772 1 6 1H13C13.5523 1 14 1.44772 14 2V10C14 10.5523 13.5523 11 13 11H11V13C11 13.5523 10.5523 14 10 14H3C2.44772 14 2 13.5523 2 13V5C2 4.44772 2.44772 4 3 4H5ZM5 5H3V13H10V11H6C5.44772 11 5 10.5523 5 10V5ZM6 2V10H13V2H6Z" fill="currentColor"/>
+            </svg>`;
+            
+            // Check icon SVG
+            const checkIcon = `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M13.5 3L6 11L2.5 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>`;
+
+            button.innerHTML = copyIcon;
 
             button.addEventListener("click", async () => {
               const code = pre.querySelector("code").textContent;
               try {
                 await navigator.clipboard.writeText(code);
-                button.textContent = "Copied!";
+                button.innerHTML = checkIcon;
                 setTimeout(() => {
-                  button.textContent = "Copy";
+                  button.innerHTML = copyIcon;
                 }, 2000);
               } catch (err) {
                 console.error("Failed to copy:", err);
-                button.textContent = "Failed";
+                button.textContent = "✕";
                 setTimeout(() => {
-                  button.textContent = "Copy";
+                  button.innerHTML = copyIcon;
                 }, 2000);
               }
             });
