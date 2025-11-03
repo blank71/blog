@@ -64,7 +64,7 @@ export const defaults: Options = {
     },
   },
   feed: {
-    output: ["/feed.xml"],
+    output: ["/rss/feed.rss"],
     query: "type*=blog|diary",
     sort: "date=desc",
     info: {
@@ -78,7 +78,7 @@ export const defaults: Options = {
     },
   },
   feedblog: {
-    output: ["/blog.xml"],
+    output: ["/rss/blog.rss"],
     query: "type=blog",
     sort: "date=desc",
     info: {
@@ -92,7 +92,7 @@ export const defaults: Options = {
     },
   },
   feeddiary: {
-    output: ["/diary.xml"],
+    output: ["/rss/diary.rss"],
     query: "type=diary",
     sort: "date=desc",
     info: {
