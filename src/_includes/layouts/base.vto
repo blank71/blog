@@ -102,6 +102,65 @@
       {{ content }}
     </main>
 
+    <!-- Code copy button script -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // Extract filename from class attribute and add as header element
+        document.querySelectorAll("pre > code[class*='filename']")
+          .forEach(
+            (code) => {
+              const classes = code.className;
+              const filenameMatch = classes.match(/filename="([^"]+)"/);
+              if (filenameMatch) {
+                const filename = filenameMatch[1];
+                const pre = code.parentElement;
+
+                // Create filename header
+                const header = document.createElement("div");
+                header.className = "code-filename";
+                header.textContent = filename;
+
+                // Insert header before pre element
+                pre.parentElement.insertBefore(header, pre);
+
+                // Add class to pre for styling
+                pre.classList.add("has-filename");
+              }
+            },
+          );
+
+        // Add copy button to code blocks
+        document.querySelectorAll("pre:has(> code.hljs)").forEach(
+          (pre) => {
+            const button = document.createElement("button");
+            button.className = "code-copy-button";
+            button.textContent = "Copy";
+            button.setAttribute("aria-label", "Copy code to clipboard");
+
+            button.addEventListener("click", async () => {
+              const code = pre.querySelector("code").textContent;
+              try {
+                await navigator.clipboard.writeText(code);
+                button.textContent = "Copied!";
+                setTimeout(() => {
+                  button.textContent = "Copy";
+                }, 2000);
+              } catch (err) {
+                console.error("Failed to copy:", err);
+                button.textContent = "Failed";
+                setTimeout(() => {
+                  button.textContent = "Copy";
+                }, 2000);
+              }
+            });
+
+            pre.style.position = "relative";
+            pre.appendChild(button);
+          },
+        );
+      });
+    </script>
+
     <!-- Current page: {{ url }} -->
   </body>
 </html>

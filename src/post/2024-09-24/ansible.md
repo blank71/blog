@@ -140,7 +140,7 @@ $ tree -a -L 1
 
 `pyproject.toml` は最低限の設定で良く、project name や project version 等は必要ないため下記で良い。
 
-```bash
+```toml {.filename="pyproject.toml"}
 cat << '_EOF_' > ./pyproject.toml
 [project]
 dependencies = []
