@@ -56,20 +56,29 @@
   position: absolute;
   top: 0.5em;
   right: 0.5em;
-  padding: 0.3em 0.8em;
-  font-size: 0.85em;
+  padding: 0.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1em;
   font-family: var(--font-ui);
   background: var(--color-background, rgba(128, 128, 128, 0.2));
   color: var(--color-text, var(--color-base));
   border: 1px solid var(--color-line);
   border-radius: 0.3em;
   cursor: pointer;
-  opacity: 0.7;
-  transition: opacity 0.2s, background 0.2s;
+  opacity: 0;
+  transition: opacity 0.2s, background 0.2s, transform 0.1s;
+  line-height: 1;
+}
+
+.code-copy-button svg {
+  display: block;
+  width: 16px;
+  height: 16px;
 }
 
 .code-copy-button:hover {
-  opacity: 1;
   background: var(--color-background, rgba(128, 128, 128, 0.3));
 }
 
@@ -79,6 +88,14 @@
 
 pre:has(> code.hljs) {
   position: relative;
+}
+
+pre:has(> code.hljs):hover .code-copy-button {
+  opacity: 0.7;
+}
+
+pre:has(> code.hljs):hover .code-copy-button:hover {
+  opacity: 1;
 }
 
 /* Ensure body uses the background color */

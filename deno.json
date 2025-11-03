@@ -1,13 +1,14 @@
 {
   "imports": {
-    "lume/": "https://deno.land/x/lume@v3.0.11/",
+    "lume/": "https://deno.land/x/lume@v3.1.1/",
     "lume/jsx-runtime": "https://deno.land/x/ssx@v0.1.12/jsx-runtime.ts"
   },
   "nodeModulesDir": "auto",
   "tasks": {
     "lume": "echo \"import 'lume/cli.ts'\" | deno run -A -",
     "build": "deno task lume",
-    "serve": "deno task lume -s"
+    "serve": "deno task lume -s",
+    "update-deps": "deno run -A --quiet 'https://deno.land/x/nudd@v0.2.10/cli.ts' update plugins.ts deno.json"
   },
   "compilerOptions": {
     "types": [
@@ -16,18 +17,22 @@
     "jsx": "react-jsx",
     "jsxImportSource": "lume"
   },
-  "unstable": [
-    "temporal",
-    "fmt-component"
-  ],
   "lint": {
-    "plugins": [
-      "https://deno.land/x/lume@v3.0.11/lint.ts"
+    "exclude": [
+      "./_site"
     ],
     "rules": {
-      "exclude": [
-        "no-import-prefix"
+      "tags": [
+        "recommended"
       ]
     }
-  }
+  },
+  "fmt": {
+    "exclude": [
+      "./_site"
+    ]
+  },
+  "unstable": [
+    "temporal"
+  ]
 }
