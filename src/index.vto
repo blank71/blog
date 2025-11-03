@@ -5,44 +5,48 @@ title: Home
 ---
 
 <header class="page-header">
-  <h1 class="page-title">blank71</h1> 
-  {{# <div class="search" id="search"></div> #}}
+  <h1 class="page-title">blank71</h1>
+  <div class="search" id="search"></div>
 </header>
 
 <section class="postList">
   {{ for post of search.pages("type*=blog|diary", "date=desc", 20) }}
-  <article class="post">
-    <header class="post-header">
-      {{ include "templates/post-details.vto" {
-        date: post.date,
-        tags: post.tags,
-        author: post.author,
-        } 
-      }}
+    <article class="post">
+      <header class="post-header">
+        {{
+          include "templates/post-details.vto" {
+            date: post.date,
+            tags: post.tags,
+            author: post.author,
+          }
+        }}
 
-      <h2 class="post-title">
-        <a href="{{ post.url }}" {{ if post.url == url }} aria-current="page"{{ /if }}>
-          {{ post.title || post.url }}
-        </a>
-      </h2>
-      
-      {{ if post.description }}
-      <h3 class="post-description">
-          {{ post.description }}
-      </h3>
-      {{ /if }}
+        <h2 class="post-title">
+          <a
+            href="{{ post.url }}"
+            {{ if post.url == url }}
+              aria-current="page"{{ /if }}
+          >
+            {{ post.title || post.url }}
+          </a>
+        </h2>
 
-    </header>
+        {{ if post.description }}
+          <h3 class="post-description">
+            {{ post.description }}
+          </h3>
+        {{ /if }}
+      </header>
 
-    {{# <div class="post-excerpt body">
+      {{# <div class="post-excerpt body">
       {{ post.excerpt |> md }}
     </div> #}}
 
-    {{# <a href="{{ post.url }}" class="post-link">
+      {{# <a href="{{ post.url }}" class="post-link">
       {{ i18n.nav.continue_reading }}
     </a> #}}
-  </article>
-{{ /for }}
+    </article>
+  {{ /for }}
 </section>
 
 <hr>

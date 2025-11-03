@@ -7,13 +7,23 @@ const site = lume({
   dest: "./output",
 });
 
-site.ignore(
-  ".gitignore",
-  "deno.json",
-  "deno.lock",
-  "README.md",
-);
+// site.ignore(
+//   ".gitignore",
+//   "deno.json",
+//   "deno.lock",
+//   "README.md",
+// );
 
-site.use(plugins());
+site.use(plugins({
+  pagefind: {
+    ui: {
+      showImages: false,
+      excerptLength: 0,
+      showEmptyFilters: true,
+      showSubResults: false,
+      resetStyles: true,
+    },
+  },
+}));
 
 export default site;

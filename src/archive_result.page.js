@@ -5,9 +5,9 @@ export default function* ({ search, i18n }) {
   for (const tag of search.values("tags")) {
     yield {
       url: `/archive/${tag}/`,
-      title: `${i18n.search.by_tag}  “${tag}”`,
+      title: `${i18n.search.by_tag}  "${tag}"`,
       type: "tag",
-      search_query: `type=post '${tag}'`,
+      search_query: `type*=blog|diary tags=${tag}`,
       tag,
     };
   }
@@ -18,7 +18,7 @@ export default function* ({ search, i18n }) {
       url: `/author/${author}/`,
       title: `${i18n.search.by_author} ${author}`,
       type: "author",
-      search_query: `type=post author='${author}'`,
+      search_query: `type*=blog|diary author='${author}'`,
       author,
     };
   }

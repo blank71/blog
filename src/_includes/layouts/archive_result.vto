@@ -7,4 +7,14 @@ bodyClass: body-tag
   <h1 class="page-title">{{ title }}</h1>
 </header>
 
-{{ include "templates/post-list.vto" { postslist: search.pages(search_query) } }}
+{{ if type == "tag" }}
+  {{
+    include "templates/post-list.vto" { postslist: search.pages(`tags*='${tag}'`) }
+  }}
+{{ /if }}
+
+{{ if type == "author" }}
+  {{
+    include "templates/post-list.vto" { postslist: search.pages(`author*='${author}'`) }
+  }}
+{{ /if }}
