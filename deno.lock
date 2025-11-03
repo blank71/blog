@@ -1666,6 +1666,8 @@
     "https://deno.land/x/lume_markdown_plugins@v0.7.0/toc/anchors.ts": "8a4a1c6b2c63156622695ceba57fa7100a6e5f109c9a383a1dcaf755233c8184",
     "https://deno.land/x/lume_markdown_plugins@v0.7.0/toc/mod.ts": "8c7aa6e1dcfabda4264503495a3875388108cd9a5a94b54853b45a8e8cba9f78",
     "https://deno.land/x/lume_markdown_plugins@v0.7.0/utils.ts": "6e6c3c394709eff39080562732c2dafe404f225253aaded937133ea694c4b735",
+    "https://deno.land/x/lume_mermaid@v0.1.4/mermaid.ts": "5c9fcb789acb903dcb59faa522d1c88df326e0f2a052b39c7dc70fadaec18eb3",
+    "https://deno.land/x/lume_mermaid@v0.1.4/mod.ts": "dcb9659e109d5f0e927a2fbc8eaa103e7b0bbff460077f9dd2a58ac626b8ee32",
     "https://deno.land/x/nudd@v0.2.10/deps.ts": "3c605a52a62eefe9892b77e1b91f781562a6b8791c7c9b49ad62d0c761e18f70",
     "https://deno.land/x/nudd@v0.2.10/registry/denoland.ts": "15783578eaf6a2edbf348aa1170de7ae4cc8b158ef57096263cd80c35d17ccd6",
     "https://deno.land/x/nudd@v0.2.10/registry/jsdelivr.ts": "ceb3f75529a42ae1bc28564ebe13427704c572e1f8edc5bb7ef135779da2cbf0",
