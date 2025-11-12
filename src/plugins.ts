@@ -176,7 +176,7 @@ export default function (userOptions?: Options) {
       .use(feed(options.feeddiary))
       .use(footnotes())
       // .use(image())
-      .use(ogImages()) // needs before metas
+      .use(ogImages({ options: options.satoriOp })) // needs before metas
       .use(metas())
       .use(pagefind(options.pagefind))
       // .use(resolveUrls())
