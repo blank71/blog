@@ -2,6 +2,17 @@
   margin-bottom: var(--row-gap-small);
 }
 
+.post {
+  position: relative;
+}
+
+.post-body {
+  /* Ensure content doesn't overlap with TOC on larger screens */
+  @media (min-width: 75em) {
+    margin-right: 17.5em; 
+  }
+}
+
 .post-title {
   font: var(--font-display);
   letter-spacing: var(--font-display-spacing);
@@ -78,5 +89,91 @@
 @media (prefers-color-scheme: dark) {
   .code-filename {
     background: var(--color-background-shade, rgba(255, 255, 255, 0.05));
+  }
+}
+
+/* TOC (Table of Contents) styling */
+.toc {
+  position: sticky;
+  top: 6rem;
+  float: right;
+  width: 20em;
+  max-height: calc(100vh - 8rem);
+  overflow-y: auto;
+  margin: 0 0 1em 2em;
+  padding: 1em;
+  background: var(--color-background-shade, rgba(0, 0, 0, 0.02));
+  border: 0.0625em solid var(--color-line);
+  border-radius: 0.5em;
+  font-size: 0.9em;
+
+  & h2 {
+    margin: 0 0 0.75em;
+    font-size: 1.1em;
+    font-weight: 600;
+    color: var(--color-base);
+  }
+
+  & ol, & ul {
+    margin: 0;
+    padding-left: 1.5em;
+    list-style: none;
+  }
+
+  & ol {
+    counter-reset: toc-counter;
+  }
+
+  & ol > li {
+    counter-increment: toc-counter;
+    position: relative;
+    margin-bottom: 0.5em;
+  }
+
+  & ol > li::before {
+    content: counter(toc-counter) ".";
+    position: absolute;
+    left: -1.5em;
+    color: var(--color-dim);
+  }
+
+  & ul > li {
+    margin-bottom: 0.3em;
+    position: relative;
+  }
+
+  & ul > li::before {
+    content: "•";
+    position: absolute;
+    left: -1.2em;
+    color: var(--color-dim);
+  }
+
+  & a {
+    color: var(--color-base);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  & a:hover {
+    color: var(--color-link);
+    text-decoration: underline;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .toc {
+    background: var(--color-background-shade, rgba(255, 255, 255, 0.03));
+  }
+}
+
+/* Responsive: stack TOC on smaller screens */
+@media (max-width: 75em) {
+  .toc {
+    position: static;
+    float: none;
+    width: auto;
+    max-height: none;
+    margin: 0 0 2em 0;
   }
 }
