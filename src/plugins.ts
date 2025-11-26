@@ -171,13 +171,13 @@ export default function (userOptions?: Options) {
       .use(postcss())
       .use(basePath())
       .use(date({ locales: { ja } }))
+      .use(ogImages({ options: options.satoriOp })) // needs before metas
+      .use(metas())
       .use(feed(options.feed))
       .use(feed(options.feedblog))
       .use(feed(options.feeddiary))
       .use(footnotes())
       // .use(image())
-      .use(ogImages({ options: options.satoriOp })) // needs before metas
-      .use(metas())
       .use(pagefind(options.pagefind))
       // .use(resolveUrls())
       // .use(sitemap())
