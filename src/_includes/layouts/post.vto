@@ -96,6 +96,10 @@ bodyClass: body-post
   {{ /if }}
 </article>
 
+<script>
+{{ include "js/post-title-scroll.js" }}
+</script>
+
 <nav class="page-pagination pagination">
   <ul>
     {{- set previousPost = search.previousPage(url, "type*=blog|diary") }}
