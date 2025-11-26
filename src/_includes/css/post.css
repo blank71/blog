@@ -1,20 +1,11 @@
 .post-header {
   margin-bottom: var(--row-gap-small);
-
-  @media (min-width: 75em) {
-    margin-right: 22em; /* 20em sidebar width + 2em gap */
-  }
 }
 
 .post {
   position: relative;
-}
-
-.post-body {
-  /* Ensure content doesn't overlap with sidebar on larger screens */
-  @media (min-width: 75em) {
-    margin-right: 22em; /* 20em sidebar width + 2em gap */
-  }
+  max-width: 70em;
+  margin: 0 auto;
 }
 
 .post-title {
@@ -192,15 +183,14 @@
 
 /* Post sidebar styling */
 .post-sidebar {
-  position: sticky;
-  top: 6rem;
-  float: right;
-  width: 20em;
-  max-height: calc(100vh - 8rem);
-  overflow-y: auto;
-  margin: 0 0 1em 2em;
-
   @media (min-width: 75em) {
+    position: fixed;
+    top: 6rem;
+    left: calc(50% + 35em + 2em); /* Position outside post body */
+    /* left: calc(50% - 47em); Position outside post body */
+    width: 20em;
+    max-height: calc(100vh - 8rem);
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
     gap: 1em;
@@ -208,7 +198,6 @@
 
   @media (max-width: 75em) {
     position: static;
-    float: none;
     width: auto;
     max-height: none;
     margin: 0 0 2em 0;
