@@ -13,7 +13,8 @@ import { merge } from "lume/core/utils/object.ts";
 import metas from "lume/plugins/metas.ts";
 import ogImages, { Options as ogOptions } from "lume/plugins/og_images.ts";
 import pagefind, { Options as PagefindOptions } from "lume/plugins/pagefind.ts";
-import postcss from "lume/plugins/postcss.ts";
+import postcss, { Options as PostCSSOptions } from "lume/plugins/postcss.ts";
+import customMedia from "npm:postcss-custom-media@11";
 // import resolveUrls from "lume/plugins/resolve_urls.ts";
 import type { SatoriOptions } from "lume/deps/satori.ts";
 // import sitemap from "lume/plugins/sitemap.ts";
@@ -49,6 +50,7 @@ export interface Options {
   feeddiary?: Partial<FeedOptions>;
   og?: Partial<ogOptions>;
   pagefind?: Partial<PagefindOptions>;
+  postcss?: Partial<PostCSSOptions>;
   satoriOp?: SatoriOptions;
   codeHighlightOp?: Partial<CodeHighlightOptions>;
 }
@@ -62,6 +64,9 @@ export const defaults: Options = {
       showSubResults: false,
       resetStyles: true,
     },
+  },
+  postcss: {
+    plugins: [customMedia()],
   },
   feed: {
     output: ["/rss/feed.rss"],
@@ -168,7 +173,7 @@ export default function (userOptions?: Options) {
           startOnLoad: true,
         },
       }))
-      .use(postcss())
+      .use(postcss(options.postcss))
       .use(basePath())
       .use(date({ locales: { ja } }))
       .use(ogImages({ options: options.satoriOp })) // needs before metas
