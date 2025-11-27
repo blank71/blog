@@ -1,5 +1,22 @@
+/* Custom media queries */
+/* Breakpoint calculation: content (70em) + sidebar (20em) + gap (2em) + margins = ~95em */
+@custom-media --large-screen (min-width: 120em);
+
+/* Post layout variables */
+:root {
+  --post-content-width: 70em;
+  --post-sidebar-width: 20em;
+  --post-sidebar-gap: 2em;
+}
+
 .post-header {
   margin-bottom: var(--row-gap-small);
+}
+
+.post {
+  position: relative;
+  max-width: var(--post-content-width);
+  margin: 0 auto;
 }
 
 .post-title {
@@ -45,6 +62,16 @@
   }
 }
 
+/* Hide date and tags on larger screens only for individual post pages (shown in sidebar) */
+.body-post .post-details {
+  @media (--large-screen) {
+    & time,
+    & .post-tags {
+      display: none;
+    }
+  }
+}
+
 .post-tags {
   display: flex;
   flex-flow: row wrap;
@@ -78,5 +105,169 @@
 @media (prefers-color-scheme: dark) {
   .code-filename {
     background: var(--color-background-shade, rgba(255, 255, 255, 0.05));
+  }
+}
+
+/* TOC (Table of Contents) styling */
+.toc {
+  position: sticky;
+  top: 6rem;
+  float: right;
+  width: var(--post-sidebar-width);
+  max-height: calc(100vh - 8rem);
+  overflow-y: auto;
+  margin: 0 0 1em var(--post-sidebar-gap);
+  padding: 1em;
+  background: var(--color-background-shade, rgba(0, 0, 0, 0.02));
+  border: 0.0625em solid var(--color-line);
+  border-radius: 0.5em;
+  font-size: 0.9em;
+
+  & h2 {
+    margin: 0 0 0.75em;
+    font-size: 1.1em;
+    font-weight: 600;
+    color: var(--color-base);
+  }
+
+  & ol, & ul {
+    margin: 0;
+    padding-left: 1.5em;
+    list-style: none;
+  }
+
+  & ol {
+    counter-reset: toc-counter;
+  }
+
+  & ol > li {
+    counter-increment: toc-counter;
+    position: relative;
+    margin-bottom: 0.5em;
+  }
+
+  & ol > li::before {
+    content: counter(toc-counter) ".";
+    position: absolute;
+    left: -1.5em;
+    color: var(--color-dim);
+  }
+
+  & ul > li {
+    margin-bottom: 0.3em;
+    position: relative;
+  }
+
+  & ul > li::before {
+    content: "•";
+    position: absolute;
+    left: -1.2em;
+    color: var(--color-dim);
+  }
+
+  & a {
+    color: var(--color-base);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  & a:hover {
+    color: var(--color-link);
+    text-decoration: underline;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .toc {
+    background: var(--color-background-shade, rgba(255, 255, 255, 0.03));
+  }
+}
+
+/* Post sidebar styling */
+.post-sidebar {
+  /* Default (small screen) styles */
+  position: static;
+  width: auto;
+  max-height: none;
+  margin: 0 0 2em 0;
+
+  @media (--large-screen) {
+    position: fixed;
+    top: 6rem;
+    left: calc(50% + var(--post-content-width) / 2 + var(--post-sidebar-gap)); /* Position outside post body */
+    width: var(--post-sidebar-width);
+    max-height: calc(100vh - 8rem);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    margin: 0;
+  }
+}
+
+.post-sidebar .toc {
+  position: static;
+  float: none;
+  width: auto;
+  max-height: none;
+  margin: 0;
+}
+
+.post-title-sidebar {
+  display: none;
+
+  @media (--large-screen) {
+    font: var(--font-display);
+    font-size: 1.5em;
+    letter-spacing: var(--font-display-spacing);
+    color: var(--color-base);
+    padding: 1em;
+    background: var(--color-background-shade, rgba(0, 0, 0, 0.02));
+    border: 0.0625em solid var(--color-line);
+    border-radius: 0.5em;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+}
+
+@media (prefers-color-scheme: dark) and (--large-screen) {
+  .post-title-sidebar {
+    background: var(--color-background-shade, rgba(255, 255, 255, 0.03));
+  }
+}
+
+.post-meta-sidebar {
+  display: none;
+
+  @media (--large-screen) {
+    display: block;
+    padding: 1em;
+    background: var(--color-background-shade, rgba(0, 0, 0, 0.02));
+    border: 0.0625em solid var(--color-line);
+    border-radius: 0.5em;
+    font-size: 0.9em;
+
+    & time {
+      display: block;
+      text-align: left;
+      font-weight: 600;
+      color: var(--color-dim);
+      margin-bottom: 0.75em;
+      padding-bottom: 0.75em;
+      border-bottom: 0.0625em solid var(--color-line);
+    }
+
+    & .post-tags-sidebar {
+      display: flex;
+      flex-flow: row wrap;
+      gap: 0.5em;
+    }
+  }
+}
+
+@media (prefers-color-scheme: dark) and (--large-screen) {
+  .post-meta-sidebar {
+    background: var(--color-background-shade, rgba(255, 255, 255, 0.03));
   }
 }

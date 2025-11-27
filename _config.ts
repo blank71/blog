@@ -14,16 +14,6 @@ const site = lume({
 //   "README.md",
 // );
 
-site.use(plugins({
-  pagefind: {
-    ui: {
-      showImages: false,
-      excerptLength: 0,
-      showEmptyFilters: true,
-      showSubResults: false,
-      resetStyles: true,
-    },
-  },
-}));
+site.use(plugins());
 
 export default site;

@@ -2,23 +2,16 @@
 layout: layouts/post.vto
 openGraphLayout: /layouts/og_images.jsx
 type: blog
-
-title: "Mattermost v11 で PostgreSQL v13 が Drop された"
-description: ""
-
-date: "2025-11-12"
+title: Mattermost v11 で PostgreSQL v13 が Drop された
+date: 2025-11-12
 changelog:
   - summary: 初稿
-    date: "2025-11-12"
-
+    date: '2025-11-12'
 draft: false
 tags:
   - Mattermost
   - PostgreSQL
-metas:
-  title: "=title"
 ---
-
 ## 概要
 Mattermost v11 から PostgreSQL v13 のサポートが終了した。
 
