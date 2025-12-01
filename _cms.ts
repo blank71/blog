@@ -23,7 +23,7 @@ cms.git();
 // URL フィールドのカスタム定義
 const url = {
   name: "url",
-  type: "text",
+  type: "text" as const,
   description: "ページの公開 URL。空欄の場合はファイルパスが使用されます。",
   transform(value: string) {
     if (!value) {
