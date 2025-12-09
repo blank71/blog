@@ -188,7 +188,7 @@ export default function (userOptions?: Options) {
       // .use(sitemap())
       // .use(terser())
       .use(toc())
-      .copy([".png"])
+      .copy([".png", ".jpg", ".jpeg"])
       .add([".css"])
       .use(codeHighlight(options.codeHighlightOp));
 
