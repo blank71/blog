@@ -1,8 +1,8 @@
 {
   "imports": {
-    "lume/": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.1.2/",
-    "lume/cms/": "https://cdn.jsdelivr.net/gh/lumeland/cms@0.14.2/",
-    "lume/jsx-runtime": "https://cdn.jsdelivr.net/gh/oscarotero/ssx@0.1.12/jsx-runtime.ts"
+    "lume/": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.1.3/",
+    "lume/cms/": "https://cdn.jsdelivr.net/gh/lumeland/cms@0.14.4/",
+    "lume/jsx-runtime": "https://cdn.jsdelivr.net/gh/oscarotero/ssx@0.1.14/jsx-runtime.ts"
   },
   "nodeModulesDir": "auto",
   "tasks": {
@@ -43,7 +43,7 @@
       ]
     },
     "plugins": [
-      "https://cdn.jsdelivr.net/gh/lumeland/lume@3.1.2/lint.ts"
+      "https://cdn.jsdelivr.net/gh/lumeland/lume@3.1.3/lint.ts"
     ]
   },
   "fmt": {
@@ -80,5 +80,5 @@
       "sys": true
     }
   },
-  "lock": false
+  "lock": true
 }
