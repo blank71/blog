@@ -86,13 +86,14 @@ bodyClass: body-post
   {{ /if }}
 
   {{ if changelog }}
-  <hr style="margin: var(--row-gap-xsmall) 0">
-  <div class="post-changelog">
+  <footer class="post-footer">
     <h2 class="header-anchor">変更履歴</h2>
+    <ul class="post-changelog">
     {{ for c of changelog }}
-    <div>{{ c.date |> date('DATE') }}: {{ c.summary }}</div>
+      <li><time datetime="{{ c.date }}">{{ c.date |> date('DATE') }}</time>: {{ c.summary }}</li>
     {{ /for }}
-  </div>
+    </ul>
+  </footer>
   {{ /if }}
 </article>
 
