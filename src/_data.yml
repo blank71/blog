@@ -10,4 +10,4 @@ metas:
   twitter: "@8blank71"
   fediverse:creator: "@blank71@fedibird.com"
   lang: ja
-  generator: ""
+  generator: false
