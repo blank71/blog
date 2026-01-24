@@ -1,0 +1,78 @@
+{{# JSON-LD Structured Data for SEO #}}
+{{ if it.type == "blog" || it.type == "diary" }}
+  {{# Article schema for blog posts #}}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "{{ it.title }}",
+    "description": "{{ it.description || '' }}",
+    "datePublished": "{{ it.date |> date('DATETIME') }}",
+    {{ if it.changelog && it.changelog.length > 0 }}
+    "dateModified": "{{ it.changelog[0].date |> date('DATETIME') }}",
+    {{ else }}
+    "dateModified": "{{ it.date |> date('DATETIME') }}",
+    {{ /if }}
+    "author": {
+      "@type": "Person",
+      "name": "{{ it.author || 'blank71' }}",
+      "url": "https://github.com/blank71"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "{{ metas.site }}",
+      "url": "https://blog.blank71.com"
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "{{ it.url |> url(true) }}"
+    }
+    {{ if it.tags && it.tags.length > 0 }}
+    ,"keywords": "{{ it.tags.join(', ') }}"
+    {{ /if }}
+  }
+  </script>
+{{ else }}
+  {{# WebSite schema for other pages #}}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "{{ metas.site }}",
+    "url": "https://blog.blank71.com",
+    "description": "{{ metas.description }}",
+    "author": {
+      "@type": "Person",
+      "name": "blank71",
+      "url": "https://github.com/blank71"
+    }
+  }
+  </script>
+{{ /if }}
+
+{{# BreadcrumbList schema #}}
+{{ set urlParts = it.url.split('/').filter(p => p) }}
+{{ if urlParts.length > 0 }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://blog.blank71.com/"
+    }
+    {{ for index, part of urlParts }}
+    ,{
+      "@type": "ListItem",
+      "position": {{ index + 2 }},
+      "name": "{{ part }}",
+      "item": "https://blog.blank71.com/{{ urlParts.slice(0, index + 1).join('/') }}/"
+    }
+    {{ /for }}
+  ]
+}
+</script>
+{{ /if }}
