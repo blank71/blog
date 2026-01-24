@@ -1,0 +1,10 @@
+# robots.txt for blog.blank71.com
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://blog.blank71.com/sitemap.xml
+
+# Disallow cache and internal files
+Disallow: /_cache/
+Disallow: /pagefind/

@@ -17,7 +17,7 @@ import postcss, { Options as PostCSSOptions } from "lume/plugins/postcss.ts";
 import customMedia from "npm:postcss-custom-media@11";
 // import resolveUrls from "lume/plugins/resolve_urls.ts";
 import type { SatoriOptions } from "lume/deps/satori.ts";
-// import sitemap from "lume/plugins/sitemap.ts";
+import sitemap from "lume/plugins/sitemap.ts";
 // import terser from "lume/plugins/terser.ts";
 import toc from "https://deno.land/x/lume_markdown_plugins@v0.7.0/toc.ts";
 
@@ -185,7 +185,7 @@ export default function (userOptions?: Options) {
       // .use(image())
       .use(pagefind(options.pagefind))
       // .use(resolveUrls())
-      // .use(sitemap())
+      .use(sitemap())
       // .use(terser())
       .use(toc())
       .copy([".png", ".jpg", ".jpeg"])

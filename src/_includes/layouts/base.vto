@@ -42,6 +42,7 @@
     >
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
     <link rel="canonical" href="{{ url |> url(true) }}">
+    {{ include "templates/json-ld.vto" }}
     {{ it.extra_head?.join("\n") }}
   </head>
   <body>
@@ -171,6 +172,10 @@
         );
       });
     </script>
+
+    <footer class="site-footer">
+      <p>&copy; {{ new Date().getFullYear() }} <a href="https://github.com/blank71">{{ metas.site }}</a>. Content: <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> | Code: <a href="https://opensource.org/licenses/MIT">MIT</a></p>
+    </footer>
 
     <!-- Current page: {{ url }} -->
   </body>

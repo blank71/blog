@@ -1,2 +1,4 @@
 metas:
   title: "=title"
+  description: "=description"
+  type: article

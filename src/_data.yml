@@ -6,8 +6,8 @@ extra_head: []
 # Metas plugin https://lume.land/plugins/metas/#description
 metas:
   site: blank71
-  description: https://github.com/blank71/blog
+  description: "blog from blank71"
   twitter: "@8blank71"
   fediverse:creator: "@blank71@fedibird.com"
   lang: ja
-  generator: ""
+  generator: false

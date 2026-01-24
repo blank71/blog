@@ -16,4 +16,7 @@ const site = lume({
 
 site.use(plugins());
 
+// Copy robots.txt to output
+site.copy("robots.txt");
+
 export default site;
