@@ -12,5 +12,8 @@
   },
   "[shellscript]": {
     "editor.defaultFormatter": "mkhl.shfmt"
+  },
+  "json.schemaDownload.trustedDomains": {
+    "https://deno.land": true
   }
 }
